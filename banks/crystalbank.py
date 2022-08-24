@@ -1,14 +1,13 @@
 import requests
 from bs4 import BeautifulSoup
-from datetime import date
 from config import crystalbank_url
 from tg_informer import send_error
+from database import insert_to_db
 
 
 @send_error
 def start(header):
-    today = str(date.today())
-    result = {"date": today}
+    result = {}
     request = requests.get(url=crystalbank_url, headers=header)
     soup = BeautifulSoup(request.text, 'lxml')
     course_table = soup.find("div", class_="carousel-entry-big-subtitle")
@@ -19,4 +18,4 @@ def start(header):
         purchase = float(pair[1].text.replace(",", "."))
         sale = float(pair[2].text.replace(",", "."))
         result.update({name: {"purchase": purchase, "sale": sale}})
-    send_to_db("crystalbank", result)
+    insert_to_db(39544699, result)

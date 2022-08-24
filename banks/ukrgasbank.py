@@ -5,7 +5,7 @@ from tg_informer import send_error
 from database import insert_to_db
 
 
-# @send_error
+@send_error
 def start(header):
     names = {
         "100 Доларів США": "USD",

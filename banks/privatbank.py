@@ -5,7 +5,7 @@ from tg_informer import send_error
 from database import insert_to_db
 
 
-# @send_error
+@send_error
 def start(header):
     result = {}
     request = requests.get(url=privatbank_url, headers=header)

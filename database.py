@@ -1,10 +1,10 @@
 import os
 
 from sqlalchemy.orm import Session
-from sqlalchemy import create_engine, select, insert
+from sqlalchemy import create_engine, select
+from sqlalchemy.dialects.postgresql import insert
 from models import *
 from dotenv import load_dotenv
-from schemas import *
 
 
 load_dotenv()
@@ -16,7 +16,7 @@ db_name = os.environ.get("DB_NAME")
 DATABASE_URL = f"postgresql://{db_user}:{db_pass}@{db_host}/{db_name}"
 
 
-engine = create_engine(DATABASE_URL)
+engine = create_engine(DATABASE_URL, future=True, echo=True)
 session = Session(engine, future=True, autocommit=False, autoflush=False)
 
 
@@ -24,11 +24,15 @@ def insert_to_db(edrpou: int, data: dict):
     bank = session.execute(select(BankList).filter_by(edrpou=edrpou)).scalar_one()
     for key in data:
         currency = session.execute(select(Currency).filter_by(code=key)).scalar_one()
-        exchange = ExchangeRates(
+        insert_exchange = insert(ExchangeRates).values(
             purchase=data[key]['purchase'],
             sale=data[key]['sale'],
-            bank=bank,
-            currency=currency
+            bank_id=bank.id,
+            currency_id=currency.id
         )
-        session.add(exchange)
+        upd_exchange = insert_exchange.on_conflict_do_update(
+            constraint='unique_exchange_rates',
+            set_=dict(purchase=data[key]['purchase'], sale=data[key]['sale'])
+        )
+        session.execute(upd_exchange)
     session.commit()
