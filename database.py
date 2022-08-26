@@ -16,7 +16,7 @@ db_name = os.environ.get("DB_NAME")
 DATABASE_URL = f"postgresql://{db_user}:{db_pass}@{db_host}/{db_name}"
 
 
-engine = create_engine(DATABASE_URL, future=True, echo=True)
+engine = create_engine(DATABASE_URL, future=True)
 session = Session(engine, future=True, autocommit=False, autoflush=False)
 
 
