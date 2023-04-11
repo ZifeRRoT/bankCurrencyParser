@@ -10,9 +10,9 @@ def start(header):
     result = {}
     request = requests.get(url=crystalbank_url, headers=header)
     soup = BeautifulSoup(request.text, 'lxml')
-    course_table = soup.find("div", class_="carousel-entry-big-subtitle")
+    course_table = soup.find("table", class_="ratestb")
     table_tr = course_table.find_all("tr")
-    for pair in table_tr[2:4]:
+    for pair in table_tr[1:]:
         pair = pair.find_all("td")
         name = pair[0].text
         purchase = float(pair[1].text.replace(",", "."))
