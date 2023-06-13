@@ -20,8 +20,8 @@ engine = create_engine(DATABASE_URL, future=True)
 session = Session(engine, future=True, autocommit=False, autoflush=False)
 
 
-def insert_to_db(edrpou: int, data: dict):
-    bank = session.execute(select(BankList).filter_by(edrpou=edrpou)).scalar_one()
+def insert_to_db(mfo: int, data: dict):
+    bank = session.execute(select(BankList).filter_by(mfo=mfo)).scalar_one()
     for key in data:
         currency = session.execute(select(Currency).filter_by(code=key)).scalar_one()
         insert_exchange = insert(ExchangeRates).values(

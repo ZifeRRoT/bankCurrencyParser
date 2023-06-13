@@ -27,4 +27,4 @@ def start(header):
         purchase = float(all_td[2].text)/100
         sale = float(all_td[3].text)/100
         result.update({name: {"purchase": purchase, "sale": sale}})
-    insert_to_db(23697280, result)
+    insert_to_db(320478, result)

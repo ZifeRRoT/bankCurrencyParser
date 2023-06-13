@@ -18,4 +18,4 @@ def start(header):
         purchase = float(pair[1].text.replace(",", "."))
         sale = float(pair[2].text.replace(",", "."))
         result.update({name: {"purchase": purchase, "sale": sale}})
-    insert_to_db(39544699, result)
+    insert_to_db(339050, result)

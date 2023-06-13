@@ -17,4 +17,4 @@ def start(header):
         purchase = float(pair.find("div", class_="purchase").text.strip())
         sale = float(pair.find("div", class_="sale").text.strip())
         result.update({name: {"purchase": purchase, "sale": sale}})
-    insert_to_db(14360570, result)
+    insert_to_db(305299, result)
