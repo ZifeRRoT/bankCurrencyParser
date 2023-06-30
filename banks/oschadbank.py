@@ -18,5 +18,4 @@ def start(header):
         purchase = float(all_td[3].text)/int(all_td[2].text)
         sale = float(all_td[4].text)/int(all_td[2].text)
         result.update({name: {"purchase": float('{:.3f}'.format(purchase)), "sale": float('{:.3f}'.format(sale))}})
-    print(result)
     insert_to_db(300465, result)
