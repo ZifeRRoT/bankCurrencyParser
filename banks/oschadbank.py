@@ -15,6 +15,8 @@ def start(header):
     for i in course_tr:
         all_td = i.find_all("td")
         name = all_td[1].text
+        if name == "HUF":
+            continue
         purchase = float(all_td[3].text)/int(all_td[2].text)
         sale = float(all_td[4].text)/int(all_td[2].text)
         result.update({name: {"purchase": float('{:.3f}'.format(purchase)), "sale": float('{:.3f}'.format(sale))}})
