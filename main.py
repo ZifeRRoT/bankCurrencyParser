@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 def get_bank_modules():
     modules = next(os.walk("banks"))[2]
     modules = [__import__("banks.%s" % x[:-3], fromlist="start") for x in modules]
-    # return [__import__("banks.privatbank", fromlist="start")]
+    # return [__import__("banks.oschadbank", fromlist="start")]
     return modules
 
 
