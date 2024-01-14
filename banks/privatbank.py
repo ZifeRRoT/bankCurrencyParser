@@ -18,3 +18,4 @@ def start(header):
         sale = float(pair.find("div", class_="sale").text.strip())
         result.update({name: {"purchase": purchase, "sale": sale}})
     insert_to_db(305299, result)
+    # print(result)

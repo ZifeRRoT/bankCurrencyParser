@@ -28,3 +28,4 @@ def start(header):
         sale = float(all_td[3].text)/100
         result.update({name: {"purchase": purchase, "sale": sale}})
     insert_to_db(320478, result)
+    # print(result)

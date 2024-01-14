@@ -18,4 +18,4 @@ headers = {
 privatbank_url = "https://privatbank.ua/rates-archive"
 ukrgasbank_url = "https://www.ukrgasbank.com/kurs"
 crystalbank_url = "https://crystalbank.com.ua"
-oschadbank_url = "https://www.oschadbank.ua/currency-rate"
+oschadbank_url = "https://oschaws.com/currency-rate"
