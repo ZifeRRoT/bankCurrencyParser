@@ -1,3 +1,4 @@
+import requests
 import chrome
 from bs4 import BeautifulSoup
 from config import crystalbank_url
@@ -5,10 +6,12 @@ from tg_informer import send_error
 from database import insert_to_db
 
 
+
 @send_error
 def start(header):
     result = {}
-    request = chrome.run_browser(crystalbank_url)
+    # request = chrome.run_browser(crystalbank_url)
+    request = requests.get(crystalbank_url, headers=header).text
     soup = BeautifulSoup(request, 'lxml')
     course_table = soup.find("table", class_="ratestb")
     table_tr = course_table.find_all("tr")
